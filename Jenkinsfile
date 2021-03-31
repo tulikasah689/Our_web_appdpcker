@@ -66,7 +66,7 @@ pipeline {
         stage('Docker Image'){
         steps{
            
-          app = docker.build dockerfile
+         app = docker.build("tulikasah689/our-web-app")
         }
       }
         stage('Uploading Image')
