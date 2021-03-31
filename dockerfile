@@ -3,6 +3,6 @@ LABEL maintainer="tulikakumari"
 COPY target/our-web-app.war /usr/local/tomcat/webapps/
 
 
-EXPOSE 9100
+EXPOSE 8080
 
 CMD ["catalina.bat","run"]
