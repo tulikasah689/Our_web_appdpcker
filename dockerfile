@@ -1,17 +1,7 @@
-FROM maven:3.5.4-jdk-8-alpine as maven
+FROM tomcat:alpine
 
-COPY ./pom.xml ./pom.xml
+RUN wget -O /usr/local/tomcat/webapps/launchstation04.war  http://localhost:8082/artifactory/libs-release-local/com/nagarro/ourfirstaap/First-web-app/0.0.1-SNAPSHOT/First-web-app-0.0.1-20210317.121307-1.war
 
-COPY ./src ./src
+EXPOSE 9100
 
-RUN mvn dependency:go-offline -B
-
-RUN mvn package
-
-FROM openjdk:8u171-jre-alpine
-
-WORKDIR /shilpabains
-
-COPY --from=maven target/our-web-app-*.jar ./our-web-app.jar
-
-CMD ["java", "-jar", "./our-web-app.jar"]
+CMD /usr/local/tomcat/bin/cataline.bat run
