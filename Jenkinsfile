@@ -65,8 +65,22 @@ pipeline {
         }
         stage('Docker Image'){
         steps{
-            bat 'docker build -t our-web-app -f Dockerfile .'
+           
+           Dockerimage= bat 'docker build -t our-web-app -f Dockerfile .'
         }
       }
+        stage('Uploading Image')
+        {
+            steps
+            {
+                script
+                {
+                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+
+        /* Push the container to the custom Registry */
+        Dockeimage.push()
+                    }
+                }
+            }
     }
 }
