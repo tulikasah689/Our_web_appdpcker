@@ -66,7 +66,7 @@ pipeline {
         stage('Docker Image'){
         steps{
            
-           Dockerimage= bat 'docker build -t our-web-app -f Dockerfile .'
+           bat 'docker build -t our-web-app -f Dockerfile .'
         }
       }
         stage('Uploading Image')
@@ -78,7 +78,7 @@ pipeline {
                      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 
         /* Push the container to the custom Registry */
-        Dockerimage.push()
+        our-web-app:latest.push()
                     }
                 }
             }
