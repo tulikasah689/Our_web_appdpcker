@@ -1,5 +1,11 @@
 pipeline {
     agent any
+      environment
+    {
+        dockerImage = ''
+        registry='tulikasah689/our-web-app'
+        registryCredential='Docker_Hub'
+    }
     tools
     {
         maven  'Maven3'
@@ -65,8 +71,10 @@ pipeline {
         }
         stage('Docker Image'){
         steps{
-           
-         app = docker.build("tulikasah689/our-web-app")
+           script
+            {
+         dockerImage = docker.build registry
+            }
         }
       }
         stage('Uploading Image')
