@@ -78,7 +78,7 @@ pipeline {
                      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 
         /* Push the container to the custom Registry */
-        our-web-app:latest.push()
+        our-web-app.push()
                     }
                 }
             }
