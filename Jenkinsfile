@@ -66,7 +66,7 @@ pipeline {
         stage('Docker Image'){
         steps{
            
-           bat 'docker build -t our-web-app -f Dockerfile .'
+           bat 'docker build -t our-web-app -f dockerfile .'
         }
       }
         stage('Uploading Image')
