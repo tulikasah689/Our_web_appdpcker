@@ -17,7 +17,7 @@ pipeline {
         {
             steps
             {
-                git url : "https://github.com/tulikasah689/FirstMavenApp.git"
+                git url : "https://github.com/tulikasah689/Our_web_appdpcker.git"
             }
         }
         stage('Build')
