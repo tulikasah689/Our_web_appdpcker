@@ -69,27 +69,40 @@ pipeline {
                         )
             }
         }
-        stage('Docker Image'){
-        steps{
-           script
-            {
-         dockerImage = docker.build registry
+        stage('Build Image')
+                    {
+                        steps
+                            {
+                                 bat "docker build -t webimage:${BUILD_NUMBER} ."
+                            }
+                    }
+
+        stage("Cleaning Previous Deployment"){
+            steps{
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            bat "docker stop container"
+                            bat "docker rm -f container"
+                        }
             }
         }
-      }
-        stage('Uploading Image')
+        stage ("Docker Deployment")
         {
-            steps
-            {
-                script
-                {
-                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-
-        /* Push the container to the custom Registry */
-        dockerImage.push()
-                    }
+        steps
+        {
+        bat "docker run --name container -d -p 9056:8080 webimage:${BUILD_NUMBER}"
+        }
+       }
+        stage ("Pushing the image to dockerhub"){
+            steps{
+                script{
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') { 
+                            bat "docker login -u tulikasah689 -p CallmeDK@1011"
+                            bat "docker tag webimage:${BUILD_NUMBER}  tulikasah689/webimage:${BUILD_NUMBER}"
+                            bat "docker rmi webimage:${BUILD_NUMBER}"
+                            bat "docker push tulikasah689/webimage:${BUILD_NUMBER}"
                 }
             }
-        }
+        }    
+      }
     }
 }
