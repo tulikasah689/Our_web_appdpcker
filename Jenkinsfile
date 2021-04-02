@@ -1,17 +1,15 @@
 pipeline {
-    agent any
-      environment
-    {
-        dockerImage = ''
-        registry='tulikasah689/webimage'
-        registryCredential='dockerhub'
-    }
+    agent any   
+    environment {
+                    registry = "tulikasah689/webimage"
+                    registryCredential = 'dockerhub'
+                    dockerImage = ''
+                 }
     tools
     {
         maven  'Maven3'
         jdk 'JDK_NEW'
     }
-   
     stages {
         stage('Fetch')
         {
@@ -48,7 +46,7 @@ pipeline {
                 }  
             }
         }
-        stage('Upload to Artifactory')
+         stage('Upload to Artifactory')
         {
             steps
             {
@@ -104,5 +102,5 @@ pipeline {
             }
         }    
       }
-    }
-}
+    }  
+  }
