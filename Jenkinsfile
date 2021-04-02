@@ -95,7 +95,7 @@ pipeline {
         stage ("Pushing the image to dockerhub"){
             steps{
                 script{
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') { 
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') { 
                             bat "docker login -u tulikasah689 -p CallmeDK@1011"
                             bat "docker tag webimage:${BUILD_NUMBER}  tulikasah689/webimage:${BUILD_NUMBER}"
                             bat "docker rmi webimage:${BUILD_NUMBER}"
