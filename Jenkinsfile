@@ -4,7 +4,7 @@ pipeline {
     {
         dockerImage = ''
         registry='tulikasah689/webimage'
-        registryCredential='Docker_Hub'
+        registryCredential='dockerhub'
     }
     tools
     {
