@@ -3,7 +3,7 @@ pipeline {
       environment
     {
         dockerImage = ''
-        registry='tulikasah689/our-web-app'
+        registry='tulikasah689/webimage'
         registryCredential='Docker_Hub'
     }
     tools
