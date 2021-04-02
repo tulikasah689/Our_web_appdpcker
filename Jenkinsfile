@@ -89,7 +89,7 @@ pipeline {
         {
         steps
         {
-        bat "docker run --name container -d -p 9056:8080 webimage:${BUILD_NUMBER}"
+        bat "docker run --name container -d -p 9056:8085 webimage:${BUILD_NUMBER}"
         }
        }
         stage ("Pushing the image to dockerhub"){
